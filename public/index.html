@@ -5,15 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>emailreplytime</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+<script async defer src="https://apis.google.com/js/api.js" 
+  onload="this.onload=function(){ if(vGM) vGM.init(); }" 
+  onreadystatechange="if(this.readyState === 'complete') this.onload()">
+</script>
+<script>
+  let vGM = ( ( _d ) =>{
+    let oGML = null; nInit = 0;
+    return {
+      "init": ()=>{
+console.log("-------- init");
+        if(++nInit === 2) vGM.handleClientLoad();
+      },
+      "handleClientLoad": () => { gapi.load( "client:auth2", vGM.initClient ); },
+      "initClient": () => { 
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        }, function(error) {
+          console.warn(JSON.stringify(error, null, 2));
+        });
+       },
+    };
+  })( document );
+</script>
   </body>
 </html>
