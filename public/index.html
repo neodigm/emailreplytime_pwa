@@ -43,7 +43,10 @@ console.log("-------- init");
        },
       "updateSigninStatus": (isSignedIn) => {
   console.log("___ ___ ___ ___ 3");
-        if (isSignedIn){ oGMLParam.getGmailData(); }
+        if (isSignedIn){ 
+          document.querySelector("DIV#inspire").__vue__.__proto__.gapi = gapi
+
+         }
       }
     };
   })( document );

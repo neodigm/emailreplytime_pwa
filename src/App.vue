@@ -113,7 +113,7 @@ console.log("-------- mounted");
         _this.oGMLParam.API_KEY = _this.doRevr( _this.oGMLParam.API_KEY );
         _this.oGMLParam.btnGgl__in = _this.$refs.btnGgl__in;
         _this.oGMLParam.btnGgl__out = _this.$refs.btnGgl__out;
-        _this.getGmailData = _this.getGmailData;
+        _this.getGmailData = function(){_this.getGmailData;};
         
         _this.gapi = vGM.vinit( _this.oGMLParam );
   console.log(" vv vv vv vv vv");
