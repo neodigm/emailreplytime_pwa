@@ -56,7 +56,10 @@
     mounted() {
     this.$nextTick(function () {
 console.log("-------- mounted");
-if(vGM) vGM.init();
+      if(vGM){
+        vGM.vinit( this.gml );
+        vGM.init();
+      }
     })
     }
   }

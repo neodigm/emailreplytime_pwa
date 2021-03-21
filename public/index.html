@@ -11,14 +11,11 @@
   </head>
   <body>
     <div id="app"></div>
-<script async defer src="https://apis.google.com/js/api.js" 
-  onload="this.onload=function(){ if(vGM) vGM.init(); }" 
-  onreadystatechange="if(this.readyState === 'complete') this.onload()">
-</script>
 <script>
   let vGM = ( ( _d ) =>{
     let oGML = null; nInit = 0;
     return {
+      "vinit": ( gml )=>{ oGML = gml},
       "init": ()=>{
 console.log("-------- init");
         if(++nInit === 2) vGM.handleClientLoad();
@@ -26,10 +23,10 @@ console.log("-------- init");
       "handleClientLoad": () => { gapi.load( "client:auth2", vGM.initClient ); },
       "initClient": () => { 
         gapi.client.init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          discoveryDocs: DISCOVERY_DOCS,
-          scope: SCOPES
+          "apiKey": oGML.API_KEY,
+          "clientId": oGML.CLIENT_ID,
+          "discoveryDocs": oGML.DISCOVERY_DOCS,
+          "scope": oGML.SCOPES
         }).then(function () {
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
@@ -39,6 +36,11 @@ console.log("-------- init");
        },
     };
   })( document );
+</script>
+
+<script async defer src="https://apis.google.com/js/api.js"
+onload="this.onload=function(){};vGM.init()"
+onreadystatechange="if (this.readyState === 'complete') this.onload()">
 </script>
   </body>
 </html>
