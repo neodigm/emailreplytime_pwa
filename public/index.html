@@ -31,7 +31,7 @@ console.log("-------- init");
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
         }, function(error) {
-          console.warn(JSON.stringify(error, null, 2));
+          console.warn(JSON.stringify(error));
         });
        },
     };

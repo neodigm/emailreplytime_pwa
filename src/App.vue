@@ -53,10 +53,15 @@
         {"caption": "Profile", "route": "mainProfile"}
       ],
     }),
+    methods: {
+      "doRevr": ( sIn = "tacocat" ) => ( sIn.split("").reverse().join("") )
+    },
     mounted() {
     this.$nextTick(function () {
 console.log("-------- mounted");
       if(vGM){
+        this.gml.CLIENT_ID = this.doRevr( this.gml.CLIENT_ID );
+        this.gml.API_KEY = this.doRevr( this.gml.API_KEY );
         vGM.vinit( this.gml );
         vGM.init();
       }
